@@ -13,9 +13,17 @@
 class NewCityShortcodes {
 
 	public function __construct() {
-		add_shortcode( 'blockquote', array( 'NewCityShortcodes', 'newcity_blockquote' ), 7 );
+		add_shortcode( 'newcity_blockquote', array( 'NewCityShortcodes', 'newcity_blockquote' ), 7 );
 		// add_filter( 'img_caption_shortcode', array( $this, 'update_caption_shortcode' ), 10, 3 );
 		add_filter( 'mce_external_plugins', array( 'NewCityShortcodes', 'add_blockquote_mce' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_jquery_ui' ) );
+	}
+
+	public function enqueue_jquery_ui() {
+		if ( ! wp_script_is( 'jquery-ui' ) ) {
+			wp_enqueue_script( 'jquery-ui' , 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js' );
+		}
+		wp_enqueue_style( 'jquery-ui' , 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' );
 	}
 
 	public static function add_blockquote_mce( $plugin_array ) {
