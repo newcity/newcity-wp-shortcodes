@@ -20,10 +20,10 @@ class NewCityShortcodes {
 	}
 
 	public function enqueue_jquery_ui() {
-		if ( ! wp_script_is( 'jquery-ui' ) ) {
-			wp_enqueue_script( 'jquery-ui' , 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js' );
-		}
-		wp_enqueue_style( 'jquery-ui' , 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' );
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_style( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+		wp_enqueue_style( 'jquery-ui-dialog' );
 	}
 
 	public static function add_blockquote_mce( $plugin_array ) {

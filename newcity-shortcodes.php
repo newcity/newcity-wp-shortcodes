@@ -8,8 +8,9 @@
  *
  * @wordpress-plugin
  * Plugin Name:       NewCity Custom Shortcodes
+ * Plugin URI: https://github.com/newcity/newcity-wp-shortcodes
  * Description:       Custom reusable tools and settings for NewCity clients
- * Version:           0.1.1-dev
+ * Version:           0.1.2-dev
  * Author:            NewCity  <geeks@insidenewcity.com>
  * Author URI:        http://insidenewcity.com
  * License:           NONE
