@@ -22,10 +22,5 @@
      die;
  }
 
-require_once( dirname( __FILE__ ) . '/class-newcity-shortcodes.php');
-
-function newcity_shortcodes_run() {
-	$newcity_shortcodes = new NewCityShortcodes();
-}
-
-newcity_shortcodes_run();
+require_once( __DIR__ . '/class-newcity-shortcodes.php');
+new NewCityShortcodes();
