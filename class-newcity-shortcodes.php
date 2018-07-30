@@ -51,7 +51,7 @@ class NewCityShortcodes {
 		if ( current_user_can( 'activate_plugins' ) ) {
 			?>
 			<div class="error message">
-				<p><?php esc_html_e( 'Shortcode UI plugin must be active for Shortcode UI Example plugin to function.', 'shortcode-ui-quote', 'shortcode-ui' ); ?></p>
+				<p><?php esc_html_e( 'Shortcode UI plugin must be active for custom shortcode editors to function.', 'shortcode-ui-quote', 'shortcode-ui' ); ?></p>
 			</div>
 			<?php
 		}
