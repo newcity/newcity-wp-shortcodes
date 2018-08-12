@@ -56,7 +56,7 @@ class NewCityShortcodesSettings {
         array( $this, 'checklist_input_callback' ),
         'newcity-shortcodes-admin',
         'newcity_shortcodes_options_main',
-        array( 'id' => 'enabled_shortcodes', 'default' => [], 'available_options'=> [ 'custom_blockquote', 'local_script' ] )
+        array( 'id' => 'enabled_shortcodes', 'default' => [], 'available_options'=> [ 'custom_blockquote', 'local_script', 'inline_media' ] )
       );
 
   }

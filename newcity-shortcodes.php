@@ -10,7 +10,7 @@
  * Plugin Name:       NewCity Custom Shortcodes
  * Plugin URI: https://github.com/newcity/newcity-wp-shortcodes
  * Description:       Custom reusable tools and settings for NewCity clients
- * Version:           0.3.6
+ * Version:           0.4.0
  * Author:            NewCity  <geeks@insidenewcity.com>
  * Author URI:        http://insidenewcity.com
  * License:           NONE
@@ -31,6 +31,7 @@
 
 require_once( dirname( __FILE__ ) . '/class-newcity-shortcodes.php');
 require_once( dirname( __FILE__ ) . '/class-local-scripts-shortcode.php');
+require_once( dirname( __FILE__ ) . '/class-inline-media-shortcode.php');
 
 function newcity_shortcodes_run() {
 	$options = get_option('newcity_shortcodes_options');
@@ -49,6 +50,10 @@ function newcity_shortcodes_run() {
 	
 	if ( in_array( 'local_script', $options['enabled_shortcodes'] ) ) {
 		$newcity_local_scripts = new NewCityLocalScriptsShortcode();
+	}
+
+	if ( in_array( 'inline_media', $options['enabled_shortcodes'] ) ) {
+		$newcity_local_scripts = new NewCityInlineMediaShortcode();
 	}
 
 }
