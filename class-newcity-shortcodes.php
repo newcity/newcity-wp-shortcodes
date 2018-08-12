@@ -57,25 +57,27 @@ class NewCityShortcodes {
 		}
 	}
 
-	public static function newcity_blockquote( $attr, $content = '' ) {
-		$attr = wp_parse_args(
-			$attr, array(
-				'source' => '',
-			)
-		);
-		ob_start();
+	if ( ! function_exists( 'newcity_blockquote' ) {
+		public static function newcity_blockquote( $attr, $content = '' ) {
+			$attr = wp_parse_args(
+				$attr, array(
+					'source' => '',
+				)
+			);
+			ob_start();
 
-		?>
+			?>
 
-		<blockquote class="inline-wysiwyg quotation-marks-wrapper">
-		   <p><?php echo ( $content ); ?></p>
-			<?php if ( ! empty( $attr['cite'] ) ) : ?>
-				<cite><?php echo esc_html( $attr['cite'] ); ?></cite>
-			<?php endif; ?>
-		</blockquote>
+			<blockquote class="inline-wysiwyg quotation-marks-wrapper">
+			   <p><?php echo ( $content ); ?></p>
+				<?php if ( ! empty( $attr['cite'] ) ) : ?>
+					<cite><?php echo esc_html( $attr['cite'] ); ?></cite>
+				<?php endif; ?>
+			</blockquote>
 
-		<?php
-		return ob_get_clean();
+			<?php
+			return ob_get_clean();
+		}
 	}
 
 	function shortcode_ui_custom_quote() {
