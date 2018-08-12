@@ -58,7 +58,7 @@ class NewCityShortcodes {
 	}
 
 	public static function custom_blockquote_function( $attr, $content = '') {
-		if ( ! function_exists('custom_blockquote' ) {
+		if ( ! function_exists('custom_blockquote' ) ) {
 			self::newcity_blockquote( $attr, $content );
 		} else {
 			custom_blockquote( $attr, $content );
