@@ -14,7 +14,7 @@ class NewCityShortcodes {
 
 	public function __construct() {
 		add_action( 'init', array($this, 'shortcode_ui_detection' ));
-		add_shortcode( 'custom_blockquote', array( 'NewCityShortcodes', 'newcity_blockquote' ), 7 );
+		add_shortcode( 'custom_blockquote', array( 'NewCityShortcodes', 'custom_blockquote_function' ), 7 );
 		// add_filter( 'img_caption_shortcode', array( $this, 'update_caption_shortcode' ), 10, 3 );
 		// add_filter( 'mce_external_plugins', array( 'NewCityShortcodes', 'add_blockquote_mce' ) );
 		// add_action( 'admin_init', array( $this, 'enqueue_jquery_ui' ) );
@@ -57,27 +57,33 @@ class NewCityShortcodes {
 		}
 	}
 
-	if ( ! function_exists( 'newcity_blockquote' ) {
-		public static function newcity_blockquote( $attr, $content = '' ) {
-			$attr = wp_parse_args(
-				$attr, array(
-					'source' => '',
-				)
-			);
-			ob_start();
-
-			?>
-
-			<blockquote class="inline-wysiwyg quotation-marks-wrapper">
-			   <p><?php echo ( $content ); ?></p>
-				<?php if ( ! empty( $attr['cite'] ) ) : ?>
-					<cite><?php echo esc_html( $attr['cite'] ); ?></cite>
-				<?php endif; ?>
-			</blockquote>
-
-			<?php
-			return ob_get_clean();
+	public static function custom_blockquote_function( $attr, $content = '') {
+		if ( ! function_exists('custom_blockquote' ) {
+			self::newcity_blockquote( $attr, $content );
+		} else {
+			custom_blockquote( $attr, $content );
 		}
+	}
+	
+	public static function newcity_blockquote( $attr, $content = '' ) {
+		$attr = wp_parse_args(
+			$attr, array(
+				'source' => '',
+			)
+		);
+		ob_start();
+
+		?>
+
+		<blockquote class="inline-wysiwyg quotation-marks-wrapper">
+		   <p><?php echo ( $content ); ?></p>
+			<?php if ( ! empty( $attr['cite'] ) ) : ?>
+				<cite><?php echo esc_html( $attr['cite'] ); ?></cite>
+			<?php endif; ?>
+		</blockquote>
+
+		<?php
+		return ob_get_clean();
 	}
 
 	function shortcode_ui_custom_quote() {
