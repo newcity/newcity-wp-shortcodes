@@ -122,7 +122,7 @@ class NewCityInlineMediaShortcode {
 			* Include an icon with your shortcode. Optional.
 			* Use a dashicon, or full HTML (e.g. <img src="/path/to/your/icon" />).
 			*/
-			// 'listItemImage' => '',
+			'listItemImage' => 'dashicons-format-image',
 			/*
 			* Define the UI for attributes of the shortcode. Optional.
 			*
