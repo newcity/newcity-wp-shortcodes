@@ -84,17 +84,16 @@ class NewCityShortcodesSettings {
   }
 
   public function checklist_input_callback($args) {
+      $disabled_state = isset( $this->options['permanent'] ) ? $this->options['permanent'] : false;
+
       foreach( $args['available_options'] as $option ) {
-        //   echo "<pre>Available Shortcodes\n";
-        // echo (isset( $this->options[$args['id']] ) );
         $check_state = in_array( $option, isset( $this->options[$args['id']] ) ? $this->options[$args['id']] : $args['default']);
-        // print_r (isset( $this->options[$args['id']] ) ? $this->options[$args['id']] : $args['default'] );
-        // echo('</pre>');
         printf(
-            '<div><input type="checkbox" id="%s" name="newcity_shortcodes_options[%s][]" value="%s" %s /> <label>%s</label></div>',
+            '<div><input type="checkbox" id="%s" name="newcity_shortcodes_options[%s][]" value="%s" %s %s /> <label>%s</label></div>',
             $args['id'], $args['id'],
             $option,
             checked( TRUE, $check_state, FALSE),
+            disabled( TRUE, $disabled_state, FALSE ),
             $option
         );
     }
