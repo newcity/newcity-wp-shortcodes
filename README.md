@@ -40,13 +40,22 @@ if ( class_exists('NewCityShortcodes')) {
     // in the plugin's options
     function lock_shortcodes_settings() {
         $current_options = get_option('newcity_shortcodes_options', false);
-        $locked_options = array_merge($current_options, array('permanent' => true));
+        $locked_options = array_merge($current_options, array('permanent' => array('enabled_plugins')));
         update_option('newcity_shortcodes_options', $locked_options, 'yes');
     }
 
     // Check if you need to set the enabled shortcodes each time a page loads
     add_action('init', 'set_nc_shortcode_option');
     add_action('init', 'lock_shortcodes_settings');
+}
+```
+
+### Locking down the local scripts path
+```PHP
+function lock_shortcodes_settings() {
+    $current_options = get_option('newcity_shortcodes_options', false);
+    $locked_options = array_merge($current_options, array('permanent' => array('script_path')));
+    update_option('newcity_shortcodes_options', $locked_options, 'yes');
 }
 ```
 

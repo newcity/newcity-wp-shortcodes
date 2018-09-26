@@ -59,6 +59,22 @@ class NewCityShortcodesSettings {
         array( 'id' => 'enabled_shortcodes', 'default' => [], 'available_options'=> [ 'custom_blockquote', 'local_script', 'inline_media' ] )
       );
 
+      add_settings_section(
+        'newcity_shortcodes_options_local_scripts',
+        'Local Scripts Shortcode Settings',
+        array(),
+        'newcity-shortcodes-admin'
+      );
+
+      add_settings_field(
+        'script_path',
+        'Default Script Path',
+        array( $this, 'string_input_callback' ),
+        'newcity-shortcodes-admin',
+        'newcity_shortcodes_options_local_scripts',
+        array( 'id' => 'script_path', 'default' => 'local-scripts' )
+      );
+
   }
   
   /**
@@ -66,10 +82,12 @@ class NewCityShortcodesSettings {
     **/
   public function string_input_callback($args)
   {
+      $value = isset( $this->options[$args['id']] ) ? esc_attr($this->options[$args['id']]) : esc_attr($args['default']);
       printf(
-          '<input type="text" id="%s" name="newcity_shortcodes_options[%s]" value="%s" />',
+          '<input type="text" id="%s" name="newcity_shortcodes_options[%s]" value="%s" %s />',
           $args['id'], $args['id'],
-          isset( $this->options[$args['id']] ) ? esc_attr( $this->options[$args['id']]) : ''
+          $value,
+          disabled( TRUE, $this->is_permanent($args['id']), FALSE )
       );
   }
 
@@ -84,7 +102,6 @@ class NewCityShortcodesSettings {
   }
 
   public function checklist_input_callback($args) {
-      $disabled_state = isset( $this->options['permanent'] ) ? $this->options['permanent'] : false;
 
       foreach( $args['available_options'] as $option ) {
         $check_state = in_array( $option, isset( $this->options[$args['id']] ) ? $this->options[$args['id']] : $args['default']);
@@ -93,10 +110,18 @@ class NewCityShortcodesSettings {
             $args['id'], $args['id'],
             $option,
             checked( TRUE, $check_state, FALSE),
-            disabled( TRUE, $disabled_state, FALSE ),
+            disabled( TRUE, $this->is_permanent($args['id']), FALSE ),
             $option
         );
     }
+  }
+
+  public function is_permanent( $setting ) {
+    if (isset($this->options['permanent'] ) ) {
+        return is_array( $this->options['permanent'] )  ? in_array($setting, $this->options['permanent']) : $this->options['permanent'];
+    } 
+    
+    return false;
   }
 
 }

@@ -12,6 +12,8 @@
 
 class NewCityLocalScriptsShortcode {
 
+	private static $default_script_path;
+
 	public function __construct() {
 		add_shortcode( 'local_script', array( 'NewCityLocalScriptsShortcode', 'local_script' ), 7 );
 		add_action( 'register_shortcode_ui', array($this, 'shortcode_ui_local_script') );
@@ -21,10 +23,11 @@ class NewCityLocalScriptsShortcode {
 		$attr = wp_parse_args(
 			$attr, array(
 				'source' => '',
+				'path' => self::$default_script_path
 			)
 		);
 
-		wp_enqueue_script( 'nc_local_script_' . $attr['script'], get_stylesheet_directory_uri() . '/local-scripts/' . $attr['script'] . '.js', '', true );
+		wp_enqueue_script( 'nc_local_script_' . $attr['script'], get_stylesheet_directory_uri() . $attr['path'] . '/' . $attr['script'] . '.js', '', true );
 		return '';
 	}
 
