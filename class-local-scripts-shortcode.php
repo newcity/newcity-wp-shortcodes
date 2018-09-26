@@ -12,14 +12,13 @@
 
 class NewCityLocalScriptsShortcode {
 
-	private static $default_script_path;
-
 	public function __construct() {
 		add_shortcode( 'local_script', array( 'NewCityLocalScriptsShortcode', 'local_script' ), 7 );
 		add_action( 'register_shortcode_ui', array($this, 'shortcode_ui_local_script') );
 	}
 
     public static function local_script( $attr ) {
+		$default_script_path = 'js';
 		$options = get_option('newcity_shortcodes_options', false);
 		$attr = wp_parse_args(
 			$attr, array(
@@ -28,7 +27,9 @@ class NewCityLocalScriptsShortcode {
 			)
 		);
 
-		wp_enqueue_script( 'nc_local_script_' . $attr['script'], get_stylesheet_directory_uri() . '/' . $attr['path'] . '/' . $attr['script'] . '.js', '', true );
+		$path = $attr['path'] ? $attr['path'] : $default_script_path;
+
+		wp_enqueue_script( 'nc_local_script_' . str_replace('/', '_', $path) . '_' . $attr['script'], get_stylesheet_directory_uri() . '/' . $path . '/' . $attr['script'] . '.js', '', true );
 		return '';
 	}
 
