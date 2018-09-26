@@ -20,14 +20,15 @@ class NewCityLocalScriptsShortcode {
 	}
 
     public static function local_script( $attr ) {
+		$options = get_option('newcity_shortcodes_options', false);
 		$attr = wp_parse_args(
 			$attr, array(
 				'source' => '',
-				'path' => self::$default_script_path
+				'path' => $options['script_path']
 			)
 		);
 
-		wp_enqueue_script( 'nc_local_script_' . $attr['script'], get_stylesheet_directory_uri() . $attr['path'] . '/' . $attr['script'] . '.js', '', true );
+		wp_enqueue_script( 'nc_local_script_' . $attr['script'], get_stylesheet_directory_uri() . '/' . $attr['path'] . '/' . $attr['script'] . '.js', '', true );
 		return '';
 	}
 

@@ -19,6 +19,7 @@ in your theme's `functions.php` file, you can either lock the values down perman
 set up an initial state for the theme.
 
 ### Locking down the enabled plugins
+
 ```PHP
 // Check for existence of newcity-wp-shortcodes plugin
 if ( class_exists('NewCityShortcodes')) {
@@ -51,6 +52,7 @@ if ( class_exists('NewCityShortcodes')) {
 ```
 
 ### Locking down the local scripts path
+
 ```PHP
 function lock_shortcodes_settings() {
     $current_options = get_option('newcity_shortcodes_options', false);
@@ -60,6 +62,7 @@ function lock_shortcodes_settings() {
 ```
 
 ### Setting initial state for enabled plugins
+
 ```PHP
 // Check for existence of newcity-wp-shortcodes plugin
 if ( class_exists('NewCityShortcodes')) {
@@ -102,6 +105,10 @@ Creates a blockquote that supports a citation field and wraps the quote body in 
 
 Allows the enqueuing of javascript files that are stored in the theme folder's `local-scripts` folder.
 This is a more secure alternative to allowing script code to be pasted directly into the content field.
+
+By default, this shortcode will look for the script named in the `source` attribute in the folder set
+as the default on the plugin settings page. This folder can be overridden using the `path` attribute,
+but all script paths must be located inside the current theme's folder.
 
 ### Inline Media Shortcode
 
