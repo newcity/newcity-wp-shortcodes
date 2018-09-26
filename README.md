@@ -110,6 +110,12 @@ By default, this shortcode will look for the script named in the `source` attrib
 as the default on the plugin settings page. This folder can be overridden using the `path` attribute,
 but all script paths must be located inside the current theme's folder.
 
+*Enqueuing `{theme-folder}/js/sample.js` when `js` is the default path*  
+`[local_script script="sample" /]`
+
+*Enqueuing `{theme-folder}/custom-path/sample02.js` when `js` is the default path*  
+`[local_script script="sample02" path="custom-path"]`
+
 ### Inline Media Shortcode
 
 A replacement for the default media placement WYSIWYG tools. Inserts an image with optional caption,
