@@ -17,19 +17,44 @@ class NewCityLocalScriptsShortcode {
 		add_action( 'register_shortcode_ui', array($this, 'shortcode_ui_local_script') );
 	}
 
+	public static function safe_path( $string, $dir = true ) {
+		// Remove leading and trailing whitespace, then remove
+		// any periods or slashes at the beginning or end
+		$path = trim(trim($string), '/.');
+
+		// Remove any double slashes (`//`). This prevents attempts
+		// to inject full URLs
+		$path = preg_replace('/\/\/+/', '', $path);
+
+
+		if (! $dir ) {
+			// Slashes are allowed in directory values, but not in
+			// file names
+			$path = str_replace('/', '', $path);
+		}
+
+		return $path;
+	}
+
     public static function local_script( $attr ) {
 		$default_script_path = 'js';
 		$options = get_option('newcity_shortcodes_options', false);
 		$attr = wp_parse_args(
 			$attr, array(
-				'source' => '',
+				'script' => '',
 				'path' => $options['script_path']
 			)
 		);
 
 		$path = $attr['path'] ? $attr['path'] : $default_script_path;
+		$path = self::safe_path($path);
 
-		wp_enqueue_script( 'nc_local_script_' . str_replace('/', '_', $path) . '_' . $attr['script'], get_stylesheet_directory_uri() . '/' . $path . '/' . $attr['script'] . '.js', '', true );
+		$script = self::safe_path($attr['script'], false);
+
+		$full_path = get_stylesheet_directory_uri() . '/' . $path . '/' . $script;
+		$full_path = esc_attr($full_path);
+
+		wp_enqueue_script( str_replace('/', '_', $full_path ), esc_attr($full_path . '.js'), '', true );
 		return '';
 	}
 
