@@ -53,9 +53,9 @@ class NewCityInlineMediaShortcode {
         
         $display_width = in_array( $attr['alignment'], ['float--left', 'float--right'] ) ? 800 : 2400;
 
-        $timber_image = new Timber\Image( $attr['attachment'] );
+        $timber_image = new \Timber\Image( $attr['attachment'] );
 
-        $resized = Timber\ImageHelper::resize( $timber_image, $display_width );
+        $resized = \Timber\ImageHelper::resize( $timber_image, $display_width );
 
         ob_start();
         ?>
