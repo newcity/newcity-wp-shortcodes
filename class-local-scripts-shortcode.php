@@ -42,7 +42,8 @@ class NewCityLocalScriptsShortcode {
 		$attr = wp_parse_args(
 			$attr, array(
 				'script' => '',
-				'path' => $options['script_path']
+				'path' => $options['script_path'],
+				'dependencies' => 'jquery',
 			)
 		);
 
@@ -54,7 +55,7 @@ class NewCityLocalScriptsShortcode {
 		$full_path = get_stylesheet_directory_uri() . '/' . $path . '/' . $script;
 		$full_path = esc_attr($full_path);
 
-		wp_enqueue_script( str_replace('/', '_', $full_path ), esc_attr($full_path . '.js'), '', true );
+		wp_enqueue_script( str_replace('/', '_', $full_path ), esc_attr($full_path . '.js'), $attr['dependencies'], false, true );
 		return '';
 	}
 
