@@ -58,8 +58,10 @@ class NewCityLocalScriptsShortcode {
 			$full_path = get_site_url( 1, '/wp-content/themes/' . basename( get_template_directory() ) ) . '/' . $path . '/' . $script;
 			$full_path = esc_attr($full_path);
 		}
+	    
+	    	$version_path = get_theme_file_path( $path . '/' . $script . '.js' );
 
-		wp_enqueue_script( str_replace('/', '_', $full_path ), esc_attr($full_path . '.js'), $attr['dependencies'], false, true );
+		wp_enqueue_script( str_replace('/', '_', $full_path ), esc_attr($full_path . '.js'), $attr['dependencies'], filemtime($version_path), true );
 		return '';
 	}
 
