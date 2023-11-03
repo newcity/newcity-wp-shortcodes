@@ -1,4 +1,4 @@
-# NewCity Shortcodes Wordpress Plugin
+# NewCity Shortcodes WordPress Plugin
 
 This plugin adds shortcodes and an interface for inserting and editing their contents.
 The editing interface depends on the [Shortcake (Shortcode UI) plugin](https://wordpress.org/plugins/shortcode-ui/)
@@ -13,7 +13,7 @@ The following shortcodes are included:
 
 ## Setting default enabled plugins for a theme
 
-This plugin sets a Wordpress option called `newcity_shortcodes_options`. It contains
+This plugin sets a WordPress option called `newcity_shortcodes_options`. It contains
 a single array called `enabled_shortcodes[]`. By setting this value with PHP, most likely
 in your theme's `functions.php` file, you can either lock the values down permanently or
 set up an initial state for the theme.
