@@ -35,7 +35,7 @@ class NewCityInlineMediaShortcode {
 			add_action( 'admin_notices', array($this, 'shortcode_ui_notices') );
 		}
 	}
-    
+
     public static function inline_media_function( $attr, $content = '') {
 		if ( ! function_exists('custom_inline_media' ) ) {
 			return self::inline_media( $attr, $content );
@@ -50,8 +50,12 @@ class NewCityInlineMediaShortcode {
 				'source' => '',
 			)
         );
-        
-        $display_width = in_array( $attr['alignment'], ['float--left', 'float--right'] ) ? 800 : 2400;
+
+		if( array_key_exists('alignment', $attr) ) {
+			$display_width = in_array( $attr['alignment'], ['float--left', 'float--right'] ) ? 800 : 2400;
+		} else {
+			$display_width = 2400;
+		}
 
         $timber_image = new \Timber\Image( $attr['attachment'] );
 
@@ -59,21 +63,22 @@ class NewCityInlineMediaShortcode {
 
         ob_start();
         ?>
-        <div class="media <?php echo $attr['alignment'] ?>">
+        <div class="media <?php if( array_key_exists('alignment', $attr) ) echo $attr['alignment']; ?>">
         <figure>
             <div class="media__wrapper">
                 <img src="<?php echo $resized ?>" alt="<?php echo $timber_image->alt ?>" />
             </div>
 
             <?php
-            if( $attr['caption'] ) {
-                echo '<figcaption>' . $attr['caption'] . '</figcaption>';
+            //if( $attr['caption'] ) {
+						if( array_key_exists('caption', $attr) ) {
+                if( $attr['caption'] ) echo '<figcaption>' . $attr['caption'] . '</figcaption>';
             }
             ?>
         </figure>
         </div>
         <?php
-        
+
 		return ob_get_clean();
 	}
 
